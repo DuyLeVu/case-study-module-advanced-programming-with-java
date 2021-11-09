@@ -42,8 +42,8 @@ public class ClientIO {
                 String[] lineContent=lineCSV.split(",");
                 int clientId=Integer.parseInt(lineContent[0]);
                 String clientName=lineContent[1];
-                String clientUsername=lineContent[4];
-                String clientPassword=lineContent[5];
+                String clientUsername=lineContent[2];
+                String clientPassword=lineContent[3];
                 clients.add(new Client(clientId,clientName,clientUsername,clientPassword));
             }
         } catch (FileNotFoundException e) {

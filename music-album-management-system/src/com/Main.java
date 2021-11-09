@@ -1,7 +1,6 @@
 package com;
 
 import com.controller.App;
-import com.model.Client;
 import com.service.Impl.ClientService;
 
 import java.util.InputMismatchException;
@@ -12,13 +11,12 @@ public class Main {
     private static ClientService clientService;
 
     public static void main(String[] args) {
-        // write your code here
         App app = new App();
         int choice_1;
         boolean check_1 = false;
         try {
             do {
-                menu_1();
+                menu_first();
                 System.out.print("Enter your choice 1: ");
                 choice_1 = SCANNER.nextInt();
                 SCANNER.nextLine();
@@ -54,7 +52,7 @@ public class Main {
     }
 
 
-    public static void menu_1() {
+    public static void menu_first() {
         System.out.println("-----------------------------MENU_1--------------------------------");
         System.out.println("1. Login");
         System.out.println("2. Register");

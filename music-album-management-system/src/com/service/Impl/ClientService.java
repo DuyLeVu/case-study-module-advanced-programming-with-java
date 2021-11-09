@@ -11,20 +11,14 @@ public class ClientService implements GeneralService<Client> {
     private  static ClientService instance;
     public static final  String PATH_FILE_CLIENT = "E:\\Personal\\C0821I1_LeVuDuy\\Module Advanced Programming with Java\\case-study-module-advanced-programming-with-java\\music-album-management-system\\src\\com\\file\\DataClient.csv";
 
-//    public ClientService() {
-//
-//        this.listClient = ClientIO.readFromFile(PATH_FILE_CLIENT);
-//    }
+    public ClientService() {
 
-//    public static ClientService getInstance() {
-//        if (instance == null) instance = new ClientService();
-//        return instance;
-//    }
+        this.listClient = ClientIO.readFromFile(PATH_FILE_CLIENT);
+    }
 
-
-    public ClientService(List<Client> listClient) {
-        this.listClient = listClient;
-        this.listClient.add(new Client(222,"Duy","duyle132","012345678"));
+    public static ClientService getInstance() {
+        if (instance == null) instance = new ClientService();
+        return instance;
     }
 
     public List<Client> getListClient() {
