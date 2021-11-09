@@ -1,16 +1,43 @@
 package com.model;
 
+import java.util.List;
+
 public class Album {
     private int id;
     private String name;
-    private Song song;
+    private List<Song> listSong;
 
 
     public Album() {
     }
 
-//    Album(String name)
-//    setName(String name)
-//    toString()
+    public Album(int id, String name, List<Song> listSong) {
+        this.id = id;
+        this.name = name;
+        this.listSong = listSong;
+    }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Song> getListSong() {
+        return listSong;
+    }
+
+    public void setListSong(List<Song> listSong) {
+        this.listSong = listSong;
+    }
 }
