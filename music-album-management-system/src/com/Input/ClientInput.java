@@ -11,13 +11,13 @@ public class ClientInput {
 
     public static Client inputClient() {
         System.out.println("Enter client information");
-        String clientUsername = inputClientUsername();
-        String clientPassword = inputClientPassword();
         int clientId = inputClientId();
         SCANNER.nextLine();
         System.out.print("Enter client name: ");
         String clientName = SCANNER.nextLine();
-        return new Client(clientId, clientName, clientUsername, clientPassword);
+        String clientUsername = inputClientUsername();
+        String clientPassword = inputClientPassword();
+        return new Client(clientId,clientName, clientUsername, clientPassword);
     }
 
     private static int inputClientId() {

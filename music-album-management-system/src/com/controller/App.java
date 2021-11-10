@@ -2,12 +2,16 @@ package com.controller;
 
 import com.Input.AlbumInput;
 import com.Input.ClientInput;
+import com.file.ClientIO;
 import com.model.Album;
 import com.model.Client;
+import com.model.Validation;
 import com.service.Impl.ClientService;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import static com.file.Path.PATH_FILE_CLIENT;
 
 public class App {
     public static Scanner SCANNER = new Scanner(System.in);
@@ -81,9 +85,54 @@ public class App {
         clientService.display();
     }
 
+    public int findIndexAccLog(){
+        String username = null;
+        Client clientLogin = null;
+        try {
+            do {
+                System.out.print("Enter username: ");
+                username = SCANNER.nextLine();
+                clientLogin = clientService.findByName(username);
+                if (clientLogin == null) {
+                    System.out.println("Wrong username!");
+                    System.out.println("1. Continue");
+                    System.out.println("0. Exit");
+                    int choice = SCANNER.nextInt();
+                    switch (choice) {
+                        case (1) -> SCANNER.nextLine();
+                        case (0) -> System.exit(0);
+                    }
+                }
+            } while (clientLogin == null);
+        } catch (InputMismatchException e) {
+            System.out.println("Input mismatch exception");
+        }
+        return clientService.findIndexByName(username);
+    }
+
     public void createNewAlbum() {
-        Album album = AlbumInput.inputAlbum();
-        client.create(album);
+        int indexOfAcc = findIndexAccLog();
+        if (Client.getInstance().getListAlbum().size() == 0) {
+            System.out.println("Enter Album information");
+            String albumName;
+            boolean invalidAlbumName;
+            do {
+                System.out.print("Enter new album's name: ");
+                albumName = SCANNER.nextLine();
+                invalidAlbumName = !Validation.isValid(albumName, Validation.USER_NAME_REGEX);
+                if (invalidAlbumName) System.out.println("Wrong format of Album's name! ");
+            } while (invalidAlbumName);
+            System.out.print("Enter Album's Id: ");
+            int albumId = SCANNER.nextInt();
+            SCANNER.nextLine();
+            Album album = new Album(albumId, albumName);
+            clientService.getListClient().get(indexOfAcc).create(album);
+            ClientIO.writetoFile(PATH_FILE_CLIENT, clientService.getListClient());
+        } else {
+            Album album = AlbumInput.inputAlbum();
+            clientService.getListClient().get(indexOfAcc).create(album);
+            ClientIO.writetoFile(PATH_FILE_CLIENT, clientService.getListClient());
+        }
     }
 }
 

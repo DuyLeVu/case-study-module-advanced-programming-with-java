@@ -1,29 +1,35 @@
 package com.model;
 
-import com.file.AlbumIO;
-import com.file.ClientIO;
 import com.service.GeneralService;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import static com.file.Path.PATH_FILE_ALBUM;
 
 public class Client implements GeneralService<Album> {
     private int id;
     private String username;
     private String password;
     private String name;
-    private List<Album> listAlbum;
+    private List<Album> listAlbum = new ArrayList<>();
     private static Client instance;
 
     public Client() {
     }
 
-    public Client(int id, String name, String username, String password) {
+    public Client(int id, String name,String username, String password)
+    {
         this.id = id;
         this.username = username;
         this.password = password;
         this.name = name;
+    }
+
+    public Client(int id, String name, String username, String password, List<Album> listAlbum) {
+        this.id = id;
+        this.name = name;
+        this.username = username;
+        this.password = password;
+        this.listAlbum = listAlbum;
     }
 
     public static Client getInstance() {
@@ -91,21 +97,21 @@ public class Client implements GeneralService<Album> {
     public void delete(String name) {
         int index = findIndexByName(name);
         if (index == -1) System.out.println("This album is not available");
-        else listAlbum.remove(index);
+        else Client.getInstance().listAlbum.remove(index);
     }
 
     @Override
     public void update(String name, String newName) {
         int index = findIndexByName(name);
         if (index == -1) System.out.println("This song is not available");
-        else listAlbum.get(index).setName(newName);
+        else Client.getInstance().listAlbum.get(index).setName(newName);
     }
 
     @Override
     public void findRelativeByName(String name) {
         for (int i = 0; i < listAlbum.size(); i++) {
-            if (listAlbum.get(i).getName().contains(name)) {
-                System.out.println(listAlbum.get(i));
+            if (Client.getInstance().listAlbum.get(i).getName().contains(name)) {
+                System.out.println(Client.getInstance().listAlbum.get(i));
             }
         }
     }
@@ -114,14 +120,14 @@ public class Client implements GeneralService<Album> {
     public Album findByName(String name) {
         int index = -1;
         for (int i = 0; i < listAlbum.size(); i++) {
-            if (listAlbum.get(i).getName().equals(name)) {
+            if (Client.getInstance().listAlbum.get(i).getName().equals(name)) {
                 index = i;
             }
         }
         if (index == -1) {
             return null;
         } else {
-            return listAlbum.get(index);
+            return Client.getInstance().listAlbum.get(index);
         }
     }
 
@@ -132,7 +138,7 @@ public class Client implements GeneralService<Album> {
 
     @Override
     public void display() {
-        for (Album album : listAlbum) {
+        for (Album album : Client.getInstance().listAlbum) {
             System.out.println(album);
         }
     }
@@ -140,7 +146,7 @@ public class Client implements GeneralService<Album> {
     public int findIndexByName(String name) {
         int indexOf = -1;
         for (int i = 0; i < listAlbum.size(); i++) {
-            if (listAlbum.get(i).getName().equals(name)) {
+            if (Client.getInstance().listAlbum.get(i).getName().equals(name)) {
                 indexOf = i;
                 break;
             }
@@ -150,15 +156,15 @@ public class Client implements GeneralService<Album> {
 
     public Album findById(int id) {
         int index = -1;
-        for (int i = 0; i < listAlbum.size(); i++) {
-            if (listAlbum.get(i).getId() == id) {
+        for (int i = 0; i < Client.getInstance().listAlbum.size(); i++) {
+            if (Client.getInstance().listAlbum.get(i).getId() == id) {
                 index = i;
             }
         }
         if (index == -1) {
             return null;
         } else {
-            return listAlbum.get(index);
+            return Client.getInstance().listAlbum.get(index);
         }
     }
 }

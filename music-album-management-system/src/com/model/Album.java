@@ -45,4 +45,9 @@ public class Album {
     public void setListSong(List<Song> listSong) {
         this.listSong = listSong;
     }
+
+    @Override
+    public String toString() {
+        return ";" + getId() + ";" + getName() + ";";
+    }
 }
