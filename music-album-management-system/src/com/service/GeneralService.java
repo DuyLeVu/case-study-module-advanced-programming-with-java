@@ -9,12 +9,12 @@ public interface GeneralService<T> {
 
     void update(String name, String newName);
 
-    void findByName(String name);
+    void findRelativeByName(String name);
+
+    T findByName(String name);
 
     List<T> displayAll();
 
     void display();
-
-    int findIndexByName(String name);
 
 }

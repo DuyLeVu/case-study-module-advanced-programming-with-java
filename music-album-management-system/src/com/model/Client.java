@@ -1,8 +1,12 @@
 package com.model;
 
+import com.file.AlbumIO;
+import com.file.ClientIO;
 import com.service.GeneralService;
 
 import java.util.List;
+
+import static com.file.Path.PATH_FILE_ALBUM;
 
 public class Client implements GeneralService<Album> {
     private int id;
@@ -10,6 +14,7 @@ public class Client implements GeneralService<Album> {
     private String password;
     private String name;
     private List<Album> listAlbum;
+    private static Client instance;
 
     public Client() {
     }
@@ -19,6 +24,11 @@ public class Client implements GeneralService<Album> {
         this.username = username;
         this.password = password;
         this.name = name;
+    }
+
+    public static Client getInstance() {
+        if (instance == null) instance = new Client();
+        return instance;
     }
 
     public int getId() {
@@ -75,7 +85,7 @@ public class Client implements GeneralService<Album> {
     @Override
     public void create(Album album) {
         listAlbum.add(album);
-    }
+        }
 
     @Override
     public void delete(String name) {
@@ -92,11 +102,26 @@ public class Client implements GeneralService<Album> {
     }
 
     @Override
-    public void findByName(String name) {
+    public void findRelativeByName(String name) {
         for (int i = 0; i < listAlbum.size(); i++) {
             if (listAlbum.get(i).getName().contains(name)) {
                 System.out.println(listAlbum.get(i));
             }
+        }
+    }
+
+    @Override
+    public Album findByName(String name) {
+        int index = -1;
+        for (int i = 0; i < listAlbum.size(); i++) {
+            if (listAlbum.get(i).getName().equals(name)) {
+                index = i;
+            }
+        }
+        if (index == -1) {
+            return null;
+        } else {
+            return listAlbum.get(index);
         }
     }
 
@@ -107,12 +132,11 @@ public class Client implements GeneralService<Album> {
 
     @Override
     public void display() {
-        for (Album album : listAlbum){
+        for (Album album : listAlbum) {
             System.out.println(album);
         }
     }
 
-    @Override
     public int findIndexByName(String name) {
         int indexOf = -1;
         for (int i = 0; i < listAlbum.size(); i++) {
@@ -122,5 +146,19 @@ public class Client implements GeneralService<Album> {
             }
         }
         return indexOf;
+    }
+
+    public Album findById(int id) {
+        int index = -1;
+        for (int i = 0; i < listAlbum.size(); i++) {
+            if (listAlbum.get(i).getId() == id) {
+                index = i;
+            }
+        }
+        if (index == -1) {
+            return null;
+        } else {
+            return listAlbum.get(index);
+        }
     }
 }

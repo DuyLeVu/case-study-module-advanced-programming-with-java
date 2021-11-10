@@ -31,7 +31,7 @@ public class Main {
                                 SCANNER.nextLine();
                                 switch (choice_2) {
                                     case 1: {
-                                        app.displayAllClient();
+                                        app.createNewAlbum();
                                         break;
                                     }
                                 }
@@ -62,7 +62,7 @@ public class Main {
 
     public static void menu_2() {
         System.out.println("-----------------------------MENU_2--------------------------------");
-        System.out.println("1. Show all Client");
+        System.out.println("1. Creat new album");
         System.out.println("2. Hello");
         System.out.println("3. GoodBye");
     }

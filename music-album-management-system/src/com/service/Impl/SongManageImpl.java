@@ -13,8 +13,8 @@ public class SongManageImpl implements GeneralService<Song> {
 
     public SongManageImpl(List<Song> listSong) {
         this.listSong = listSong;
-        listSong.add(new Song(1,"A LONG FINAL"));
-        listSong.add(new Song(2,"HÃY TRAO CHO HUY"));
+        listSong.add(new Song(1, "A LONG FINAL"));
+        listSong.add(new Song(2, "HÃY TRAO CHO HUY"));
     }
 
 
@@ -34,7 +34,7 @@ public class SongManageImpl implements GeneralService<Song> {
         else listSong.get(index).setName(newName);
     }
 
-    public void findByName(String name) {
+    public void findRelativeByName(String name) {
         for (int i = 0; i < listSong.size(); i++) {
             if (listSong.get(i).getName().contains(name)) {
                 System.out.println(listSong.get(i));
@@ -42,13 +42,18 @@ public class SongManageImpl implements GeneralService<Song> {
         }
     }
 
-    public List<Song> displayAll() {
-        return null;
-    }
-
-    public void display() {
-        for (Song song : listSong){
-            System.out.println(song);
+    @Override
+    public Song findByName(String name) {
+        int index = -1;
+        for (int i = 0; i < listSong.size(); i++) {
+            if (listSong.get(i).getName().equals(name)) {
+                index = i;
+            }
+        }
+        if (index == -1) {
+            return null;
+        } else {
+            return listSong.get(index);
         }
     }
 
@@ -62,9 +67,15 @@ public class SongManageImpl implements GeneralService<Song> {
         }
         return indexOf;
     }
+
+    public List<Song> displayAll() {
+        return null;
+    }
+
+    public void display() {
+        for (Song song : listSong) {
+            System.out.println(song);
+        }
+    }
+
 }
-//    public String stringHandling(String str) {
-//        String result;
-//        result = str.trim().toUpperCase();
-//        return result;
-//    }

@@ -1,6 +1,8 @@
 package com.controller;
 
+import com.Input.AlbumInput;
 import com.Input.ClientInput;
+import com.model.Album;
 import com.model.Client;
 import com.service.Impl.ClientService;
 
@@ -34,26 +36,21 @@ public class App {
             do {
                 System.out.print("Enter username: ");
                 username = SCANNER.nextLine();
-                clientLogin = clientService.findByUsername(username);
+                clientLogin = clientService.findByName(username);
                 if (clientLogin == null) {
                     System.out.println("Wrong username!");
                     System.out.println("1. Continue");
                     System.out.println("0. Exit");
                     int choice = SCANNER.nextInt();
                     switch (choice) {
-                        case (1):
-                            clientLogin = null;
-                            SCANNER.nextLine();
-                            break;
-                        case (0):
-                            System.exit(0);
-                            break;
+                        case (1) -> SCANNER.nextLine();
+                        case (0) -> System.exit(0);
                     }
                 }
             } while (clientLogin == null);
         } catch (InputMismatchException e) {
-                System.out.println("Input mismatch exception");
-            }
+            System.out.println("Input mismatch exception");
+        }
 
         String password;
         do {
@@ -83,4 +80,10 @@ public class App {
     public void displayAllClient() {
         clientService.display();
     }
+
+    public void createNewAlbum() {
+        Album album = AlbumInput.inputAlbum();
+        client.create(album);
+    }
 }
+

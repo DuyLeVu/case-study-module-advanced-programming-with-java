@@ -39,7 +39,7 @@ public class ClientInput {
         do {
             System.out.print("Enter client username: ");
             clientUsername = SCANNER.nextLine();
-            existUsername = ClientService.getInstance().findByUsername(clientUsername) != null;
+            existUsername = ClientService.getInstance().findByName(clientUsername) != null;
             invalidUsername = !Validation.isValid(clientUsername, Validation.USER_NAME_REGEX);
             if (invalidUsername) System.out.println("Wrong format of username! ");
             else if (existUsername) System.out.println("Username already existed! ");

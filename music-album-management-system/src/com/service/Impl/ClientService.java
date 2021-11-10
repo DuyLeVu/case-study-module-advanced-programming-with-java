@@ -54,11 +54,26 @@ public class ClientService implements GeneralService<Client> {
     }
 
     @Override
-    public void findByName(String name) {
+    public void findRelativeByName(String name) {
         for (int i = 0; i < listClient.size(); i++) {
             if (listClient.get(i).getUsername().contains(name)) {
                 System.out.println(listClient.get(i));
             }
+        }
+    }
+
+    @Override
+    public Client findByName(String name) {
+        int index=-1;
+        for (int i = 0; i < listClient.size(); i++) {
+            if(listClient.get(i).getUsername().equals(name)) {
+                index=i;
+            }
+        }
+        if (index==-1) {
+            return null;
+        } else {
+            return listClient.get(index);
         }
     }
 
@@ -74,7 +89,6 @@ public class ClientService implements GeneralService<Client> {
         }
     }
 
-    @Override
     public int findIndexByName(String name) {
         int indexOf = -1;
         for (int i = 0; i < listClient.size(); i++) {
@@ -100,17 +114,4 @@ public class ClientService implements GeneralService<Client> {
         }
     }
 
-    public Client findByUsername(String username) {
-        int index=-1;
-        for (int i = 0; i < listClient.size(); i++) {
-            if(listClient.get(i).getUsername().equals(username)) {
-                index=i;
-            }
-        }
-        if(index==-1) {
-            return null;
-        } else {
-            return listClient.get(index);
-        }
-    }
 }

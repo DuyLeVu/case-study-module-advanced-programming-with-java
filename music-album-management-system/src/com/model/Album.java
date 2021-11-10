@@ -11,6 +11,11 @@ public class Album {
     public Album() {
     }
 
+    public Album(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Album(int id, String name, List<Song> listSong) {
         this.id = id;
         this.name = name;
