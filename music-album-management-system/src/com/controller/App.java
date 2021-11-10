@@ -81,7 +81,7 @@ public class App {
         clientService.create(client);
     }
 
-    public int findIndexAccLog(){
+    public int findIndexAccLog() {
         String username = null;
         Client clientLogin = null;
         try {
@@ -106,9 +106,17 @@ public class App {
         return clientService.findIndexByName(username);
     }
 
+    public boolean checkNull() {
+        boolean isNull = false;
+        if (Client.getInstance().getListAlbum().size() == 0) {
+            isNull = true;
+        }
+        return isNull;
+    }
+
     public void createNewAlbum() {
         int indexOfAcc = findIndexAccLog();
-        if (Client.getInstance().getListAlbum().size() == 0) {
+        if (checkNull()) {
             System.out.println("Enter Album information");
             String albumName;
             boolean invalidAlbumName;
@@ -133,7 +141,9 @@ public class App {
 
     public void displayAllAlbum() {
         int indexOfAcc = findIndexAccLog();
-        clientService.getListClient().get(indexOfAcc).display();
+        if (checkNull()){
+            System.out.println("List Album is empty!");
+        }else clientService.getListClient().get(indexOfAcc).display();
     }
 }
 

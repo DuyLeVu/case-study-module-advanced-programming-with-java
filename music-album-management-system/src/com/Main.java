@@ -67,6 +67,9 @@ public class Main {
         System.out.println("-----------------------------MENU_CLIENT--------------------------------");
         System.out.println("1. Creat new album");
         System.out.println("2. Display album list");
+        System.out.println("2. Update album");
+        System.out.println("2. Display album list");
+        System.out.println("2. Display album list");
         System.out.println("3. GoodBye");
     }
 
