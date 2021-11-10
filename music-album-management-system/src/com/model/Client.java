@@ -138,7 +138,9 @@ public class Client implements GeneralService<Album> {
 
     @Override
     public void display() {
-        for (Album album : Client.getInstance().listAlbum) {
+        System.out.printf("|%-12s|%-12s","Album Id","Album Name");
+        System.out.println();
+        for (Album album : this.listAlbum) {
             System.out.println(album);
         }
     }

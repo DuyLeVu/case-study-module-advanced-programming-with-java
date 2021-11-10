@@ -23,7 +23,7 @@ public class ClientIO {
                         client.getUsername() + "," +
                         client.getPassword() + ",";
                 for (int i = 0; i < client.getListAlbum().size(); i++) {
-                    str += client.getListAlbum().get(i).getName() + ";";
+                    str +=  client.getListAlbum().get(i).getId() + "-" + client.getListAlbum().get(i).getName() + ";";
                 }
             }
             bufferedWriter.write(str);
@@ -48,10 +48,12 @@ public class ClientIO {
                 String clientName = lineContent[1];
                 String clientUsername = lineContent[2];
                 String clientPassword = lineContent[3];
-                String[] albumNames = lineContent[4].split(";");
-                for (int i = 0; i < albumNames.length; i++) {
-                    String albumName = albumNames[i];
-                    Album album = Client.getInstance().findByName(albumName);
+                String[] albumContent = lineContent[4].split(";");
+                for (int i = 0; i < albumContent.length; i++){
+                String[] lineAlbumContent = albumContent[i].split("-");
+                    int albumId = Integer.parseInt(lineAlbumContent[0]);
+                    String albumName = lineAlbumContent[1];
+                    Album album = new Album(albumId, albumName);
                     albums.add(album);
                 }
                 clients.add(new Client(clientId, clientName, clientUsername, clientPassword, albums));

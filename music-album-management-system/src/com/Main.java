@@ -16,7 +16,7 @@ public class Main {
         boolean check_1 = false;
         try {
             do {
-                menu_first();
+                menu_app();
                 System.out.print("Enter your choice 1: ");
                 choice_1 = SCANNER.nextInt();
                 SCANNER.nextLine();
@@ -25,13 +25,17 @@ public class Main {
                         if (app.login() == 1) {
                             int choice_2;
                             do {
-                                menu_2();
+                                menu_client();
                                 System.out.print("Enter your choice 2: ");
                                 choice_2 = SCANNER.nextInt();
                                 SCANNER.nextLine();
                                 switch (choice_2) {
                                     case 1: {
                                         app.createNewAlbum();
+                                        break;
+                                    }
+                                    case 2:{
+                                        app.displayAllAlbum();
                                         break;
                                     }
                                 }
@@ -51,19 +55,18 @@ public class Main {
         }
     }
 
-
-    public static void menu_first() {
-        System.out.println("-----------------------------MENU_1--------------------------------");
+    public static void menu_app() {
+        System.out.println("-----------------------------MENU_APP--------------------------------");
         System.out.println("1. Login");
         System.out.println("2. Register");
         System.out.println("3. Exit");
 
     }
 
-    public static void menu_2() {
-        System.out.println("-----------------------------MENU_2--------------------------------");
+    public static void menu_client() {
+        System.out.println("-----------------------------MENU_CLIENT--------------------------------");
         System.out.println("1. Creat new album");
-        System.out.println("2. Hello");
+        System.out.println("2. Display album list");
         System.out.println("3. GoodBye");
     }
 

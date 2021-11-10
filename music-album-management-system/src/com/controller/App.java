@@ -81,10 +81,6 @@ public class App {
         clientService.create(client);
     }
 
-    public void displayAllClient() {
-        clientService.display();
-    }
-
     public int findIndexAccLog(){
         String username = null;
         Client clientLogin = null;
@@ -133,6 +129,11 @@ public class App {
             clientService.getListClient().get(indexOfAcc).create(album);
             ClientIO.writetoFile(PATH_FILE_CLIENT, clientService.getListClient());
         }
+    }
+
+    public void displayAllAlbum() {
+        int indexOfAcc = findIndexAccLog();
+        clientService.getListClient().get(indexOfAcc).display();
     }
 }
 

@@ -48,6 +48,6 @@ public class Album {
 
     @Override
     public String toString() {
-        return ";" + getId() + ";" + getName() + ";";
+        return String.format("|%-12d|%-12s",getId(),getName());
     }
 }
