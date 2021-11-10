@@ -103,8 +103,7 @@ public class Client implements GeneralService<Album> {
     @Override
     public void update(String name, String newName) {
         int index = findIndexByName(name);
-        if (index == -1) System.out.println("This song is not available");
-        else Client.getInstance().listAlbum.get(index).setName(newName);
+       this.listAlbum.get(index).setName(newName);
     }
 
     @Override
@@ -120,14 +119,14 @@ public class Client implements GeneralService<Album> {
     public Album findByName(String name) {
         int index = -1;
         for (int i = 0; i < listAlbum.size(); i++) {
-            if (Client.getInstance().listAlbum.get(i).getName().equals(name)) {
+            if (this.listAlbum.get(i).getName().equals(name)) {
                 index = i;
             }
         }
         if (index == -1) {
             return null;
         } else {
-            return Client.getInstance().listAlbum.get(index);
+            return this.listAlbum.get(index);
         }
     }
 
@@ -148,7 +147,7 @@ public class Client implements GeneralService<Album> {
     public int findIndexByName(String name) {
         int indexOf = -1;
         for (int i = 0; i < listAlbum.size(); i++) {
-            if (Client.getInstance().listAlbum.get(i).getName().equals(name)) {
+            if (this.listAlbum.get(i).getName().equals(name)) {
                 indexOf = i;
                 break;
             }
@@ -158,15 +157,15 @@ public class Client implements GeneralService<Album> {
 
     public Album findById(int id) {
         int index = -1;
-        for (int i = 0; i < Client.getInstance().listAlbum.size(); i++) {
-            if (Client.getInstance().listAlbum.get(i).getId() == id) {
+        for (int i = 0; i < this.listAlbum.size(); i++) {
+            if (this.listAlbum.get(i).getId() == id) {
                 index = i;
             }
         }
         if (index == -1) {
             return null;
         } else {
-            return Client.getInstance().listAlbum.get(index);
+            return this.listAlbum.get(index);
         }
     }
 }

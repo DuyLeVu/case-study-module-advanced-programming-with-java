@@ -38,8 +38,15 @@ public class Main {
                                         app.displayAllAlbum();
                                         break;
                                     }
+                                    case 3:{
+                                        app.updateAlbum();
+                                        break;
+                                    }
+//                                    System.out.println("4. Delete album by name");
+//                                    System.out.println("5. Find album by name");
+//                                    System.out.println("6. Exit");
                                 }
-                            } while (choice_2 <= 3 && choice_2 >= 1);
+                            } while (choice_2 <= 4 && choice_2 >= 1);
                         }
                         break;
                     case 2:
@@ -67,10 +74,10 @@ public class Main {
         System.out.println("-----------------------------MENU_CLIENT--------------------------------");
         System.out.println("1. Creat new album");
         System.out.println("2. Display album list");
-        System.out.println("2. Update album");
-        System.out.println("2. Display album list");
-        System.out.println("2. Display album list");
-        System.out.println("3. GoodBye");
+        System.out.println("3. Update album");
+        System.out.println("4. Delete album by name");
+        System.out.println("5. Find album by name");
+        System.out.println("6. Exit");
     }
 
 }

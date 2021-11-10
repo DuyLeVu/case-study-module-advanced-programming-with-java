@@ -106,9 +106,9 @@ public class App {
         return clientService.findIndexByName(username);
     }
 
-    public boolean checkNull() {
+    public boolean checkNull(int indexOfAcc) {
         boolean isNull = false;
-        if (Client.getInstance().getListAlbum().size() == 0) {
+        if (clientService.getListClient().get(indexOfAcc).getListAlbum().size() == 0) {
             isNull = true;
         }
         return isNull;
@@ -116,7 +116,7 @@ public class App {
 
     public void createNewAlbum() {
         int indexOfAcc = findIndexAccLog();
-        if (checkNull()) {
+        if (checkNull(indexOfAcc)) {
             System.out.println("Enter Album information");
             String albumName;
             boolean invalidAlbumName;
@@ -141,9 +141,41 @@ public class App {
 
     public void displayAllAlbum() {
         int indexOfAcc = findIndexAccLog();
-        if (checkNull()){
+        if (checkNull(indexOfAcc)) {
             System.out.println("List Album is empty!");
-        }else clientService.getListClient().get(indexOfAcc).display();
+        } else clientService.getListClient().get(indexOfAcc).display();
+    }
+
+    public void updateAlbum() {
+        int indexOfAcc = findIndexAccLog();
+        if (checkNull(indexOfAcc)) {
+            System.out.println("List Album is empty!");
+        } else {
+            String albumName;
+            Album albumToUpdate = null;
+            try {
+                do {
+                    System.out.print("Enter your album name you want update: ");
+                     albumName = SCANNER.nextLine();
+                    albumToUpdate = clientService.getListClient().get(indexOfAcc).findByName(albumName);
+                    if (albumToUpdate == null) {
+                        System.out.println("Wrong album name!");
+                        System.out.println("1. Continue");
+                        System.out.println("0. Exit");
+                        int choice = SCANNER.nextInt();
+                        switch (choice) {
+                            case (1) -> SCANNER.nextLine();
+                            case (0) -> System.exit(0);
+                        }
+                    }
+                }
+                while (albumToUpdate == null);
+                String albumNewName = AlbumInput.inputAlbumName();
+                clientService.getListClient().get(indexOfAcc).update(albumName, albumNewName);
+            } catch (InputMismatchException e) {
+                System.out.println("Input mismatch exception");
+            }
+        }
     }
 }
 
