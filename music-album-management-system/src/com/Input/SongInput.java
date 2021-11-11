@@ -4,6 +4,7 @@ import com.model.Song;
 import com.model.Validation;
 import com.service.Impl.SongService;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class SongInput {
@@ -20,13 +21,17 @@ public class SongInput {
 
     private static int inputSongId() {
         boolean existId;
-        int songId;
-        do {
-            System.out.print("Enter Song Id: ");
-            songId = SCANNER.nextInt();
-            existId = SongService.getInstance().findById(songId) != null;
-            if (existId) System.out.println("Id already existed!");
-        } while (existId);
+        int songId = 0;
+        try {
+            do {
+                System.out.print("Enter Song Id: ");
+                songId = SCANNER.nextInt();
+                existId = SongService.getInstance().findById(songId) != null;
+                if (existId) System.out.println("Id already existed!");
+            } while (existId);
+        } catch (InputMismatchException e) {
+            System.out.println("Input mismatch exception");
+        }
         return songId;
     }
 
@@ -40,5 +45,10 @@ public class SongInput {
             if (invalidSongName) System.out.println("Wrong format of Song name! ");
         } while (invalidSongName);
         return songName;
+    }
+
+    public static int inputSongIdToFind() {
+        System.out.print("Enter Song Id: ");
+        return SCANNER.nextInt();
     }
 }

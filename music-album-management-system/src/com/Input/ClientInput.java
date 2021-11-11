@@ -4,6 +4,7 @@ import com.model.Client;
 import com.model.Validation;
 import com.service.Impl.ClientService;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ClientInput {
@@ -22,14 +23,20 @@ public class ClientInput {
 
     private static int inputClientId() {
         boolean existId;
-        int clientId;
+        int clientId = 0;
+        try{
         do {
             System.out.print("Enter client Id: ");
             clientId = SCANNER.nextInt();
             existId = ClientService.getInstance().findById(clientId) != null;
             if (existId) System.out.println("Id already existed!");
-        } while (existId);
+        }
+        while (existId);
+        } catch (InputMismatchException e){
+            System.out.println("Input mismatch exception");
+        }
         return clientId;
+
     }
 
     public static String inputClientUsername() {

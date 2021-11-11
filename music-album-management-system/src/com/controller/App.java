@@ -60,7 +60,7 @@ public class App {
         do {
             System.out.print("Enter password: ");
             password = SCANNER.nextLine();
-            boolean isAdminAcount = username.equals("ProAdmin") && password.equals("ProAdmin123");
+            boolean isAdminAcount = username.equals("proadmin") && password.equals("proadmin123");
             if (isAdminAcount) {
                 role = ROLE_ADMIN;
             }
@@ -123,7 +123,7 @@ public class App {
             do {
                 System.out.print("Enter new album's name: ");
                 albumName = SCANNER.nextLine();
-                invalidAlbumName = !Validation.isValid(albumName, Validation.USER_NAME_REGEX);
+                invalidAlbumName = !Validation.isValid(albumName, Validation.NAME_REGEX);
                 if (invalidAlbumName) System.out.println("Wrong format of Album's name! ");
             } while (invalidAlbumName);
             System.out.print("Enter Album's Id: ");

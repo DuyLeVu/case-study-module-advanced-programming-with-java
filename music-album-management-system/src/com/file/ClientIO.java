@@ -12,7 +12,6 @@ public class ClientIO {
         File file = new File(pathFile);
 //        FileWriter fileWriter = null;
         try {
-
             FileWriter fileWriter = new FileWriter(file);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 //            bufferedWriter.write("Client ID,Client Name,Client Username,Client Password");
