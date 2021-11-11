@@ -5,13 +5,24 @@ import com.service.GeneralService;
 
 import java.util.List;
 
-public class SongManageImpl implements GeneralService<Song> {
+public class SongService implements GeneralService<Song> {
     private List<Song> listSong;
+    private  static SongService instance;
+//    public static final  String PATH_FILE_CLIENT = "E:\\Personal\\C0821I1_LeVuDuy\\Module Advanced Programming with Java\\case-study-module-advanced-programming-with-java\\music-album-management-system\\src\\com\\file\\DataClient.csv";
 
-    public SongManageImpl() {
+//    public SongService() {
+//        this.listClient = ClientIO.readFromFile(PATH_FILE_CLIENT);
+//    }
+
+    public static SongService getInstance() {
+        if (instance == null) instance = new SongService();
+        return instance;
     }
 
-    public SongManageImpl(List<Song> listSong) {
+    public SongService() {
+    }
+
+    public SongService(List<Song> listSong) {
         this.listSong = listSong;
         listSong.add(new Song(1, "A LONG FINAL"));
         listSong.add(new Song(2, "HÃY TRAO CHO HUY"));
@@ -72,10 +83,23 @@ public class SongManageImpl implements GeneralService<Song> {
         return null;
     }
 
-    public void display() {
+    public static void display() {
         for (Song song : listSong) {
             System.out.println(song);
         }
     }
 
+    public Song findById(int id) {
+        int index = -1;
+        for (int i = 0; i < listSong.size(); i++) {
+            if (listSong.get(i).getId() == id) {
+                index = i;
+            }
+        }
+        if (index == -1) {
+            return null;
+        } else {
+            return listSong.get(index);
+        }
+    }
 }

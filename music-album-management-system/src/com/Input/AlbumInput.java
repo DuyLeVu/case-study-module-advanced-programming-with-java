@@ -10,9 +10,9 @@ import java.util.Scanner;
 public class AlbumInput {
     public static final Scanner SCANNER = new Scanner(System.in);
 
-    public static Album inputAlbum() {
+    public static Album inputAlbum(int indexOfAcc) {
         System.out.println("Enter Album information");
-        String albumName = inputAlbumName();
+        String albumName = inputAlbumName(indexOfAcc);
         int albumId = inputAlbumId();
         SCANNER.nextLine();
         return new Album(albumId, albumName);
@@ -30,15 +30,15 @@ public class AlbumInput {
         return albumId;
     }
 
-    public static String inputAlbumName() {
+    public static String inputAlbumName(int indexOfAcc) {
         String albumName;
         boolean existAlbumName;
         boolean invalidAlbumName;
         do {
             System.out.print("Enter new album's name: ");
             albumName = SCANNER.nextLine();
-            existAlbumName = Client.getInstance().findByName(albumName) != null;
-            invalidAlbumName = !Validation.isValid(albumName, Validation.USER_NAME_REGEX);
+            existAlbumName = ClientService.getInstance().getListClient().get(indexOfAcc).findByName(albumName) != null;
+            invalidAlbumName = !Validation.isValid(albumName, Validation.NAME_REGEX);
             if (invalidAlbumName) System.out.println("Wrong format of Album's name! ");
             else if (existAlbumName) System.out.println("Album's name already existed! ");
         } while (invalidAlbumName || existAlbumName);

@@ -16,8 +16,7 @@ public class Client implements GeneralService<Album> {
     public Client() {
     }
 
-    public Client(int id, String name,String username, String password)
-    {
+    public Client(int id, String name, String username, String password) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -91,26 +90,33 @@ public class Client implements GeneralService<Album> {
     @Override
     public void create(Album album) {
         listAlbum.add(album);
-        }
+    }
 
     @Override
     public void delete(String name) {
         int index = findIndexByName(name);
         if (index == -1) System.out.println("This album is not available");
-        else Client.getInstance().listAlbum.remove(index);
+        else this.listAlbum.remove(index);
     }
 
     @Override
     public void update(String name, String newName) {
         int index = findIndexByName(name);
-       this.listAlbum.get(index).setName(newName);
+        this.listAlbum.get(index).setName(newName);
     }
 
     @Override
     public void findRelativeByName(String name) {
+        List<Album> newListAlbumFound = new ArrayList<>();
         for (int i = 0; i < listAlbum.size(); i++) {
-            if (Client.getInstance().listAlbum.get(i).getName().contains(name)) {
-                System.out.println(Client.getInstance().listAlbum.get(i));
+            if (this.listAlbum.get(i).getName().contains(name)) {
+                newListAlbumFound.add(this.listAlbum.get(i));
+            }
+        }
+        if (newListAlbumFound.size() == 0) System.out.println("Album name not available!!!");
+        else {
+            for (int i = 0; i < newListAlbumFound.size();i++){
+                System.out.println(newListAlbumFound.get(i));
             }
         }
     }
@@ -137,7 +143,7 @@ public class Client implements GeneralService<Album> {
 
     @Override
     public void display() {
-        System.out.printf("|%-12s|%-12s","Album Id","Album Name");
+        System.out.printf("|%-12s|%-12s", "Album Id", "Album Name");
         System.out.println();
         for (Album album : this.listAlbum) {
             System.out.println(album);

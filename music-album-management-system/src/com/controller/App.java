@@ -133,7 +133,7 @@ public class App {
             clientService.getListClient().get(indexOfAcc).create(album);
             ClientIO.writetoFile(PATH_FILE_CLIENT, clientService.getListClient());
         } else {
-            Album album = AlbumInput.inputAlbum();
+            Album album = AlbumInput.inputAlbum(indexOfAcc);
             clientService.getListClient().get(indexOfAcc).create(album);
             ClientIO.writetoFile(PATH_FILE_CLIENT, clientService.getListClient());
         }
@@ -156,7 +156,7 @@ public class App {
             try {
                 do {
                     System.out.print("Enter your album name you want update: ");
-                     albumName = SCANNER.nextLine();
+                    albumName = SCANNER.nextLine();
                     albumToUpdate = clientService.getListClient().get(indexOfAcc).findByName(albumName);
                     if (albumToUpdate == null) {
                         System.out.println("Wrong album name!");
@@ -170,12 +170,60 @@ public class App {
                     }
                 }
                 while (albumToUpdate == null);
-                String albumNewName = AlbumInput.inputAlbumName();
+                String albumNewName = AlbumInput.inputAlbumName(indexOfAcc);
                 clientService.getListClient().get(indexOfAcc).update(albumName, albumNewName);
             } catch (InputMismatchException e) {
                 System.out.println("Input mismatch exception");
             }
         }
+    }
+
+    public void deleteAlbum() {
+        int indexOfAcc = findIndexAccLog();
+        if (checkNull(indexOfAcc)) {
+            System.out.println("List Album is empty!");
+        } else {
+            String albumName;
+            Album albumToDelete = null;
+            try {
+                do {
+                    System.out.print("Enter your album name you want delete: ");
+                    albumName = SCANNER.nextLine();
+                    albumToDelete = clientService.getListClient().get(indexOfAcc).findByName(albumName);
+                    if (albumToDelete == null) {
+                        System.out.println("Wrong album name!");
+                        System.out.println("1. Continue");
+                        System.out.println("0. Exit");
+                        int choice = SCANNER.nextInt();
+                        switch (choice) {
+                            case (1) -> SCANNER.nextLine();
+                            case (0) -> System.exit(0);
+                        }
+                    }
+                }
+                while (albumToDelete == null);
+                clientService.getListClient().get(indexOfAcc).delete(albumName);
+                System.out.println("Delete song successful!");
+            } catch (InputMismatchException e) {
+                System.out.println("Input mismatch exception");
+            }
+        }
+    }
+
+    public void findAlbumByName() {
+        int indexOfAcc = findIndexAccLog();
+        if (checkNull(indexOfAcc)) {
+            System.out.println("List Album is empty!");
+        } else {
+            String albumNameToFind;
+            try {
+                    System.out.print("Enter the album name you are looking for: ");
+                    albumNameToFind = SCANNER.nextLine();
+                    clientService.getListClient().get(indexOfAcc).findRelativeByName(albumNameToFind);
+            } catch (InputMismatchException e) {
+                System.out.println("Input mismatch exception");
+            }
+    }
     }
 }
 
